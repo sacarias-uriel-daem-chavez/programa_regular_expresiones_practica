@@ -20,11 +20,25 @@ fn main() {
         let rows_de_contenido = clone_contenido_csv.lines();
 
         for line in rows_de_contenido.clone(){
-            let captura_regular_e = regular_e.captures(line);
+            let mut manipulacion_line = line.to_string();
+            let captura_regular_e = regular_e.captures(&manipulacion_line);
                 
             if captura_regular_e.is_some(){
-                print!("captura-->  {}  <--\n", captura_regular_e.unwrap().get(0).unwrap().as_str());
                 print!("{}\n", line);
+                loop{
+                    let regular_e2 = Regex::new(&input_user).unwrap_or(Regex::new(r".").unwrap());
+                    let captura_regular_e2 = regular_e2.captures(&manipulacion_line);
+
+                    if captura_regular_e2.is_none(){break;}
+
+                    let captura = captura_regular_e2.unwrap().get(0).unwrap().as_str();
+
+                    if captura == "" {break;}
+                    let replace_line= manipulacion_line.replacen(captura, "", 1);
+                    print!(">{} ", captura);
+                    manipulacion_line = replace_line;
+                }
+                print!("\n\n");
             }
         }
 
