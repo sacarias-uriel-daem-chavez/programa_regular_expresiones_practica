@@ -21,11 +21,25 @@ fn main() {
         let rows_de_contenido = clone_contenido_csv.lines();
 
         for line in rows_de_contenido.clone(){
-            let captura_regular_e = regular_e.captures(line);
+            let mut manipulacion_line = line.to_string();
+            let captura_regular_e = regular_e.captures(&manipulacion_line);
                 
             if captura_regular_e.is_some(){
-                print!("captura-->  {}  <--\n", captura_regular_e.unwrap().get(0).unwrap().as_str());
                 print!("{}\n", line);
+                loop{
+                    let captura_regular_e = regular_e.captures(&manipulacion_line);
+
+                    if captura_regular_e.is_none(){break;}
+
+                    let captura = captura_regular_e.unwrap().get(0).unwrap().as_str();
+
+                    if captura == "" {break;}
+
+                    let replacen_line = manipulacion_line.replacen(captura, "", 1);
+                    print!(">{} ", captura);
+                    manipulacion_line = replacen_line;
+                }
+                print!("\n\n");
             }
         }
 
