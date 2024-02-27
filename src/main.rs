@@ -13,8 +13,9 @@ fn main() {
         if input_user == "***" { break; }
 
         //let path_csv= "movies.csv";
-        let path_liners = "liners_phone";
-        let contenido_csv = fs::read_to_string(path_liners).unwrap();
+        //let path_liners = "liners_phone";
+        let path_csv = "resultados_futbol.csv";
+        let contenido_csv = fs::read_to_string(path_csv).unwrap();
         let regular_e = Regex::new(&input_user).unwrap_or(Regex::new(r".").unwrap());
         let clone_contenido_csv = contenido_csv.clone();
         let rows_de_contenido = clone_contenido_csv.lines();
